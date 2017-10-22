@@ -7,7 +7,7 @@ public class MinedDocument {
     private String title;
     private String link;
     private String comments;
-    private String relations;
+    private String[] relations;
     private String subjects;
     private String content;
 
@@ -45,11 +45,11 @@ public class MinedDocument {
         this.comments = comments;
     }
 
-    public String getRelations() {
+    public String[] getRelations() {
         return relations;
     }
 
-    public void setRelations(String relations) {
+    public void setRelations(String[] relations) {
         this.relations = relations;
     }
 
@@ -68,4 +68,17 @@ public class MinedDocument {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public String toString(){
+        StringBuilder str = new StringBuilder("Authors: ").append(getAuthors()).append("\n");
+        str.append("Title: ").append(getAuthors()).append("\n");
+        str.append("Subjects: ").append(getSubjects()).append("\n");
+        str.append("Comments: ").append(getComments()).append("\n");
+        str.append("Link: ").append(getLink()).append("\n");
+        for(int i = 0; i < getRelations().length; i++){
+            str.append("Relation").append(i+1).append(": ").append(getRelations()[i]).append("\n");
+        }
+        return  str.toString();
+    }
+
 }
