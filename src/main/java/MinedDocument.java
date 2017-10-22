@@ -9,6 +9,7 @@ public class MinedDocument {
     private String comments;
     private String relations;
     private String subjects;
+    private String content;
 
 
 
@@ -60,4 +61,11 @@ public class MinedDocument {
         this.subjects = subjects;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 }
