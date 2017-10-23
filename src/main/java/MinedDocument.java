@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * Created by jg3ad on 22/10/2017.
  */
@@ -7,7 +9,7 @@ public class MinedDocument {
     private String title;
     private String link;
     private String comments;
-    private String[] relations;
+    private List<String> relations;
     private String subjects;
     private String content;
 
@@ -45,11 +47,11 @@ public class MinedDocument {
         this.comments = comments;
     }
 
-    public String[] getRelations() {
+    public List<String> getRelations() {
         return relations;
     }
 
-    public void setRelations(String[] relations) {
+    public void setRelations(List<String> relations) {
         this.relations = relations;
     }
 
@@ -75,8 +77,8 @@ public class MinedDocument {
         str.append("Subjects: ").append(getSubjects()).append("\n");
         str.append("Comments: ").append(getComments()).append("\n");
         str.append("Link: ").append(getLink()).append("\n");
-        for(int i = 0; i < getRelations().length; i++){
-            str.append("Relation").append(i+1).append(": ").append(getRelations()[i]).append("\n");
+        for(int i = 0; i < getRelations().size(); i++){
+            str.append("Relation").append(i+1).append(": ").append(getRelations().get(i)).append("\n");
         }
         return  str.toString();
     }

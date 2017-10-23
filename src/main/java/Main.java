@@ -100,16 +100,32 @@ public class Main {
         }
     }
 
-    private static String[] getRelations(Annotation doc) {
-        String[] relations= new String[doc.size()];
+    private static List<String> getRelations(Annotation doc) {
+        List<String> relations= new ArrayList<String>();
 
         int cont=1;
         for (CoreMap sentence : doc.get(CoreAnnotations.SentencesAnnotation.class)) {
             Collection<RelationTriple> triples = sentence.get(NaturalLogicAnnotations.RelationTriplesAnnotation.class);
             // Print the triples
             for (RelationTriple triple : triples) {
-                relations[cont]="Relation " + (cont+1) + ": " + triple.relationGloss() + " (+" + triple.objectGloss()+"," + triple.subjectGloss()+")";
+
+                /*
+                System.out.println(cont);
+                System.out.println(triple.confidence);
+                System.out.println(triple.confidenceGloss());
+                System.out.println(triple.relationGloss());
+                System.out.println(triple.relationLemmaGloss());
+                System.out.println(triple.objectGloss());
+                System.out.println(triple.objectLemmaGloss());
+                System.out.println(triple.objectLink());
+                System.out.println(triple.subjectGloss());
+                System.out.println(triple.subjectLemmaGloss());
+                System.out.println(triple.subjectLink());
+                System.out.println("\n\n");
+                */
+                relations.add("Relation " + cont + ": " + triple.relationGloss() + " (" + triple.objectGloss()+"," + triple.subjectGloss()+")");
             }
+            cont++;
         }
 
         return relations;
