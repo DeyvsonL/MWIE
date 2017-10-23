@@ -21,9 +21,14 @@ public class Main {
         try {
             List<MinedDocument> minedDocuments = wrapper();
             setRelations(minedDocuments);
-
+            /*
             for(MinedDocument md : minedDocuments){
                 System.out.println(md.toString());
+            }
+            */
+
+            for(int i=0; i<3;i++){
+                System.out.println(minedDocuments.get(i).toString());
             }
 
         } catch (IOException e) {
@@ -34,12 +39,15 @@ public class Main {
     }
 
     private static List<MinedDocument> wrapper() throws IOException {
+        System.out.println("Iniciando Wrapper");
         List<MinedDocument> minedDocuments = new ArrayList<MinedDocument>();
         Document doc = Jsoup.connect("https://arxiv.org/list/quant-ph/new").get();
         Elements docLinks = doc.select("dt");
         Elements docDesc = doc.select("dd");
 
+        System.out.print("Lendo Documentos");
         for(int i = 0; i < docLinks.size(); i++){
+            System.out.print(".");
             Element element = docLinks.get(i);
             Element elementDesc = docDesc.get(i);
 
@@ -84,20 +92,26 @@ public class Main {
             minedDoc.setSubjects(subjects);
             minedDoc.setContent(content);
         }
+        System.out.println("\nEncerrando Wrapper...\n\n");
 
         return minedDocuments;
     }
 
     public static void setRelations(List<MinedDocument> minedDocuments) throws IOException {
+        System.out.print("Capturando relações");
+
         Properties props = new Properties();
         props.setProperty("annotators", "tokenize,ssplit,pos,lemma,depparse,natlog,openie");
         StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
 
         for(MinedDocument md : minedDocuments){
+            System.out.print(".");
+
             Annotation doc = new Annotation(md.getContent());
             pipeline.annotate(doc);
             md.setRelations(getRelations(doc));
         }
+        System.out.println("\nEncerrando captura de relações...\n\n");
     }
 
     private static List<String> getRelations(Annotation doc) {
@@ -123,7 +137,7 @@ public class Main {
                 System.out.println(triple.subjectLink());
                 System.out.println("\n\n");
                 */
-                relations.add("Relation " + cont + ": " + triple.relationGloss() + " (" + triple.objectGloss()+"," + triple.subjectGloss()+")");
+                relations.add(triple.relationGloss() + " (" + triple.objectGloss()+"," + triple.subjectGloss()+")");
             }
             cont++;
         }

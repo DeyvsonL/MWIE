@@ -73,7 +73,7 @@ public class MinedDocument {
 
     public String toString(){
         StringBuilder str = new StringBuilder("Authors: ").append(getAuthors()).append("\n");
-        str.append("Title: ").append(getAuthors()).append("\n");
+        str.append("Title: ").append(getTitle()).append("\n");
         str.append("Subjects: ").append(getSubjects()).append("\n");
         str.append("Comments: ").append(getComments()).append("\n");
         str.append("Link: ").append(getLink()).append("\n");
